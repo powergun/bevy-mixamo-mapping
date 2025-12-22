@@ -1,0 +1,9 @@
+/target
+.tmp/
+.claude/
+.cursor/
+*.ignore
+.env
+CLAUDE.md
+AGENT.md
+
