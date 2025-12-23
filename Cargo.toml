@@ -1,7 +1,49 @@
 [package]
-name = "bevy_mixamo_mapping"
+name = "bevy_mixamo_2d"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85.0"
+license = "MIT OR Apache-2.0"
+description = "Convert Mixamo 3D animations to 2D skeletal animations for Bevy"
+keywords = ["bevy", "animation", "mixamo", "2d", "skeleton"]
+categories = ["game-development", "graphics"]
+
+[lib]
+name = "bevy_mixamo_2d"
+path = "src/lib.rs"
+
+[[bin]]
+name = "mixamo2d"
+path = "src/bin/cli.rs"
+required-features = ["cli"]
+
+[features]
+default = ["visualization"]
+cli = ["dep:clap"]
+visualization = ["dep:bevy"]
 
 [dependencies]
-bevy = "0.17.3"
+gltf = { version = "1.4", features = ["names"] }
+ufbx = "0.10"
+glam = { version = "0.30", features = ["serde"] }
+ron = "0.12"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "2.0"
+
+# CLI dependencies (optional)
+clap = { version = "4.5", features = ["derive"], optional = true }
+
+# Bevy dependencies (optional, for visualization and runtime)
+bevy = { version = "0.17", default-features = false, features = [
+    "bevy_asset",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_gizmos",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "multi_threaded",
+    "x11",
+], optional = true }
+
+[dev-dependencies]
+bevy = { version = "0.17", features = ["bevy_dev_tools"] }
