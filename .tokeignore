@@ -1,0 +1,7 @@
+testdata/
+assets/*.ron
+.tmp/
+ws/
+.claude/
+.cursor/
+

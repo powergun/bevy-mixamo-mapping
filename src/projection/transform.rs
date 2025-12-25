@@ -207,26 +207,43 @@ fn project_bone_timeline(channels: &BoneChannels, config: &ProjectionConfig) -> 
 }
 
 /// Project Vec3 to Vec2 based on view axis
+///
+/// Mixamo coordinate convention:
+/// - Z axis: forward (positive) / backward (negative)
+/// - X axis: left (positive) / right (negative) from character's perspective
+/// - Y axis: up (positive) / down (negative)
+///
+/// When viewing along an axis, we project the perpendicular plane to 2D.
+/// The sign conventions ensure:
+/// - Positive forward motion (in 3D) appears as leftward motion (in 2D) for side-scrollers
+/// - Positive upward motion (in 3D) appears as upward motion (in 2D)
 fn project_vec3(v: Vec3, config: &ProjectionConfig) -> Vec2 {
     match config.view_axis {
-        ViewAxis::X => Vec2::new(v.y, v.z), // Looking along X, see YZ
-        ViewAxis::Y => Vec2::new(v.x, v.z), // Looking along Y, see XZ
-        ViewAxis::Z => Vec2::new(v.x, v.y), // Looking along Z, see XY (side view)
+        // Looking along +X axis (from right side of character):
+        // 3D +Z (forward) → 2D -X (leftward on screen)
+        // 3D +Y (up) → 2D +Y (upward on screen)
+        ViewAxis::X => Vec2::new(-v.z, v.y),
+        ViewAxis::Y => Vec2::new(v.x, v.z), // Looking along Y, see XZ (top-down view)
+        ViewAxis::Z => Vec2::new(v.x, v.y), // Looking along Z, see XY (front/back view)
     }
 }
 
 /// Project 3D rotation to 2D angle
 ///
-/// Extracts the rotation around the view axis
+/// Computes the angle of the bone's direction when projected to 2D.
+/// Bones in skeletal systems typically point along local +Y.
+/// We rotate Vec3::Y by the bone's rotation, project to 2D, and compute the angle.
 fn project_rotation(q: Quat, config: &ProjectionConfig) -> f32 {
-    // Convert to euler angles and extract the relevant rotation
-    let (x, y, z) = q.to_euler(glam::EulerRot::XYZ);
+    // Bones typically point along local +Y axis
+    // Compute where this direction points in world space after rotation
+    let bone_direction_3d = q * Vec3::Y;
 
-    match config.view_axis {
-        ViewAxis::X => x, // Rotation around X axis
-        ViewAxis::Y => y, // Rotation around Y axis
-        ViewAxis::Z => z, // Rotation around Z axis (most common for side-scrollers)
-    }
+    // Project the direction to 2D
+    let bone_direction_2d = project_vec3(bone_direction_3d, config);
+
+    // Compute the angle this direction makes with the 2D +Y axis
+    // atan2(x, y) gives the angle from +Y axis, counterclockwise positive
+    bone_direction_2d.x.atan2(bone_direction_2d.y)
 }
 
 /// Compute foreshortening scale based on depth

@@ -1,9 +1,15 @@
 /target
+
 .tmp/
+.screenshots/
+.screenshot/
+
 .claude/
 .cursor/
-*.ignore
-.env
 CLAUDE.md
 AGENT.md
 
+*.ignore
+.env
+
+ws/

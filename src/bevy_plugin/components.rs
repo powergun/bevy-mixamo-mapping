@@ -300,6 +300,55 @@ impl BoneEntity {
 // DEBUG VISUALIZATION COMPONENTS
 // ═══════════════════════════════════════════════════════════════════════════════
 
+/// Mode for determining bone colors during debug visualization.
+///
+/// This allows bones to be colored based on their names or positions.
+#[derive(Clone, Debug, Default, Reflect)]
+pub enum BoneColorMode {
+    /// All bones use the same color
+    #[default]
+    Uniform,
+    /// Color bones based on left/right keywords in their names.
+    /// - Bones with "Left" or "left" in their name use `left_color`
+    /// - Bones with "Right" or "right" in their name use `right_color`
+    /// - Other bones use the default `bone_color` from config
+    LeftRightSplit {
+        /// Color for bones with "Left" or "left" in their name
+        left_color: Color,
+        /// Color for bones with "Right" or "right" in their name
+        right_color: Color,
+    },
+}
+
+impl BoneColorMode {
+    /// Create a LeftRightSplit mode with the given colors
+    pub fn left_right(left: Color, right: Color) -> Self {
+        Self::LeftRightSplit {
+            left_color: left,
+            right_color: right,
+        }
+    }
+
+    /// Get the color for a bone based on its name and the default color
+    pub fn color_for_bone(&self, bone_name: &str, default_color: Color) -> Color {
+        match self {
+            BoneColorMode::Uniform => default_color,
+            BoneColorMode::LeftRightSplit {
+                left_color,
+                right_color,
+            } => {
+                if bone_name.contains("Left") || bone_name.contains("left") {
+                    *left_color
+                } else if bone_name.contains("Right") || bone_name.contains("right") {
+                    *right_color
+                } else {
+                    default_color
+                }
+            }
+        }
+    }
+}
+
 /// Configuration for skeleton debug visualization.
 ///
 /// Add this component to a skeleton entity to enable debug drawing.
@@ -310,12 +359,14 @@ pub struct SkeletonDebugConfig {
     pub draw_bones: bool,
     /// Whether to draw primitive shapes attached to bones
     pub draw_shapes: bool,
-    /// Color for bone lines
+    /// Color for bone lines (used as default or for uniform coloring)
     pub bone_color: Color,
     /// Color for shape outlines
     pub shape_color: Color,
     /// Line thickness for bones
     pub bone_thickness: f32,
+    /// Mode for determining per-bone colors
+    pub bone_color_mode: BoneColorMode,
 }
 
 impl Default for SkeletonDebugConfig {
@@ -326,6 +377,7 @@ impl Default for SkeletonDebugConfig {
             bone_color: Color::srgb(0.0, 1.0, 0.0), // Green
             shape_color: Color::srgb(1.0, 1.0, 0.0), // Yellow
             bone_thickness: 2.0,
+            bone_color_mode: BoneColorMode::Uniform,
         }
     }
 }

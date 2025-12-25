@@ -1,0 +1,1110 @@
+Skeleton2D(
+    name: "Idle",
+    bones: [
+        Bone2D(
+            name: "mixamorig:Hips",
+            parent: None,
+            length: 9979.19,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    9979.19,
+                ),
+                rotation: 0.00008726646,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:Spine",
+            parent: Some(0),
+            length: 992.35,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.089999996,
+                    992.35,
+                ),
+                rotation: 0.000012127185,
+                scale: Vec2(
+                    0.8906861,
+                    0.8906861,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:Spine1",
+            parent: Some(1),
+            length: 1173.2001,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1173.2001,
+                ),
+                rotation: -0.000019198622,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:Spine2",
+            parent: Some(2),
+            length: 1345.88,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1345.88,
+                ),
+                rotation: 0.0000065325767,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:Neck",
+            parent: Some(3),
+            length: 1502.7799,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1502.7799,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    0.9192951,
+                    0.9192951,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:Head",
+            parent: Some(4),
+            length: 1032.18,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1032.18,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    0.760896,
+                    0.760896,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:HeadTop_End",
+            parent: Some(5),
+            length: 1847.4701,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.02,
+                    1847.4701,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    0.60109156,
+                    0.60109156,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftShoulder",
+            parent: Some(3),
+            length: 1096.3827,
+            setup: Transform2D(
+                translation: Vec2(
+                    610.58,
+                    910.63,
+                ),
+                rotation: -1.7734542,
+                scale: Vec2(
+                    0.92961854,
+                    0.92961854,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftArm",
+            parent: Some(7),
+            length: 1292.23,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1292.23,
+                ),
+                rotation: 0.20261264,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftForeArm",
+            parent: Some(8),
+            length: 2740.47,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    2740.47,
+                ),
+                rotation: 0.00000000000000003216348,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHand",
+            parent: Some(9),
+            length: 2761.45,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    2761.45,
+                ),
+                rotation: -0.000000000000000025283667,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandThumb1",
+            parent: Some(10),
+            length: 483.45648,
+            setup: Transform2D(
+                translation: Vec2(
+                    -300.3,
+                    378.88,
+                ),
+                rotation: 0.4636473,
+                scale: Vec2(
+                    0.82188857,
+                    0.82188857,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandThumb2",
+            parent: Some(11),
+            length: 474.5,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    474.5,
+                ),
+                rotation: -0.00000000000000011229396,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandThumb3",
+            parent: Some(12),
+            length: 438.21002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    438.21002,
+                ),
+                rotation: 0.00000000000000072164497,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandThumb4",
+            parent: Some(13),
+            length: 345.91,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    345.91,
+                ),
+                rotation: 0.14543216,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandIndex1",
+            parent: Some(10),
+            length: 1258.7023,
+            setup: Transform2D(
+                translation: Vec2(
+                    -282.2,
+                    1226.6599,
+                ),
+                rotation: 0.00000000000000007209997,
+                scale: Vec2(
+                    0.9773451,
+                    0.9773451,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandIndex2",
+            parent: Some(15),
+            length: 389.19998,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    389.19998,
+                ),
+                rotation: -0.00000000000000007574482,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandIndex3",
+            parent: Some(16),
+            length: 341.52,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    341.52,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandIndex4",
+            parent: Some(17),
+            length: 307.80002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    307.80002,
+                ),
+                rotation: 0.000045366043,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandMiddle1",
+            parent: Some(10),
+            length: 1277.55,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1277.55,
+                ),
+                rotation: 0.00000000000000008772697,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandMiddle2",
+            parent: Some(19),
+            length: 361.4,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    361.4,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandMiddle3",
+            parent: Some(20),
+            length: 345.98,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    345.98,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandMiddle4",
+            parent: Some(21),
+            length: 368.02002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    368.02002,
+                ),
+                rotation: -0.0013089719,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandRing1",
+            parent: Some(10),
+            length: 1234.7589,
+            setup: Transform2D(
+                translation: Vec2(
+                    221.65999,
+                    1214.7001,
+                ),
+                rotation: -0.0000000000000000791151,
+                scale: Vec2(
+                    0.99900097,
+                    0.99900097,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandRing2",
+            parent: Some(23),
+            length: 360.12,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    360.12,
+                ),
+                rotation: -0.000000000000000092065024,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandRing3",
+            parent: Some(24),
+            length: 330.73,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    330.73,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandRing4",
+            parent: Some(25),
+            length: 366.01,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    366.01,
+                ),
+                rotation: 0.0015408812,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandPinky1",
+            parent: Some(10),
+            length: 1188.7893,
+            setup: Transform2D(
+                translation: Vec2(
+                    472.58002,
+                    1090.8201,
+                ),
+                rotation: 0.000000000000000095974186,
+                scale: Vec2(
+                    0.97788996,
+                    0.97788996,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandPinky2",
+            parent: Some(27),
+            length: 413.67,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    413.67,
+                ),
+                rotation: 0.00000000000000019013174,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandPinky3",
+            parent: Some(28),
+            length: 259.48,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    259.48,
+                ),
+                rotation: -0.00000000000000020598767,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftHandPinky4",
+            parent: Some(29),
+            length: 292.38998,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    292.38998,
+                ),
+                rotation: -0.0011501533,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightShoulder",
+            parent: Some(3),
+            length: 1096.3854,
+            setup: Transform2D(
+                translation: Vec2(
+                    -610.57,
+                    910.63995,
+                ),
+                rotation: 1.7734525,
+                scale: Vec2(
+                    0.92961854,
+                    0.92961854,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightArm",
+            parent: Some(31),
+            length: 1292.23,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1292.23,
+                ),
+                rotation: -0.20261419,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightForeArm",
+            parent: Some(32),
+            length: 2740.47,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    2740.47,
+                ),
+                rotation: 0.00000000000000003216348,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHand",
+            parent: Some(33),
+            length: 2761.45,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    2761.45,
+                ),
+                rotation: -0.000000000000000025394895,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandThumb1",
+            parent: Some(34),
+            length: 483.45648,
+            setup: Transform2D(
+                translation: Vec2(
+                    300.3,
+                    378.88,
+                ),
+                rotation: -0.4636473,
+                scale: Vec2(
+                    0.82188857,
+                    0.82188857,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandThumb2",
+            parent: Some(35),
+            length: 474.5,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    474.5,
+                ),
+                rotation: 0.00000000000000061062293,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandThumb3",
+            parent: Some(36),
+            length: 438.21002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    438.21002,
+                ),
+                rotation: -0.0000000000000014432899,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandThumb4",
+            parent: Some(37),
+            length: 345.91,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    345.91,
+                ),
+                rotation: -0.14599021,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandIndex1",
+            parent: Some(34),
+            length: 1258.7023,
+            setup: Transform2D(
+                translation: Vec2(
+                    282.2,
+                    1226.6599,
+                ),
+                rotation: 0.000000000000000002617862,
+                scale: Vec2(
+                    0.9773451,
+                    0.9773451,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandIndex2",
+            parent: Some(39),
+            length: 389.19998,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    389.19998,
+                ),
+                rotation: -0.00000000000000005429845,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandIndex3",
+            parent: Some(40),
+            length: 341.52,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    341.52,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandIndex4",
+            parent: Some(41),
+            length: 307.80002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    307.80002,
+                ),
+                rotation: 0.002748685,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandMiddle1",
+            parent: Some(34),
+            length: 1277.55,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1277.55,
+                ),
+                rotation: 0.000000000000000023714158,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandMiddle2",
+            parent: Some(43),
+            length: 361.4,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    361.4,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandMiddle3",
+            parent: Some(44),
+            length: 345.98,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    345.98,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandMiddle4",
+            parent: Some(45),
+            length: 368.02002,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    368.02002,
+                ),
+                rotation: -0.0034169906,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandRing1",
+            parent: Some(34),
+            length: 1234.7589,
+            setup: Transform2D(
+                translation: Vec2(
+                    -221.65999,
+                    1214.7001,
+                ),
+                rotation: -0.00000000000000003951461,
+                scale: Vec2(
+                    0.99900097,
+                    0.99900097,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandRing2",
+            parent: Some(47),
+            length: 360.12,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    360.12,
+                ),
+                rotation: 0.00000000000000021243795,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandRing3",
+            parent: Some(48),
+            length: 330.73,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    330.73,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandRing4",
+            parent: Some(49),
+            length: 366.01,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    366.01,
+                ),
+                rotation: -0.00060227007,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandPinky1",
+            parent: Some(34),
+            length: 1188.7893,
+            setup: Transform2D(
+                translation: Vec2(
+                    -472.58002,
+                    1090.8201,
+                ),
+                rotation: 0.00000000000000005782295,
+                scale: Vec2(
+                    0.97788996,
+                    0.97788996,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandPinky2",
+            parent: Some(51),
+            length: 413.67,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    413.67,
+                ),
+                rotation: 0.00000000000000001989796,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandPinky3",
+            parent: Some(52),
+            length: 259.48,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    259.48,
+                ),
+                rotation: 0.00000000000000016284093,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightHandPinky4",
+            parent: Some(53),
+            length: 292.38998,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    292.38998,
+                ),
+                rotation: 0.004411134,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftUpLeg",
+            parent: Some(0),
+            length: 1129.4418,
+            setup: Transform2D(
+                translation: Vec2(
+                    912.39,
+                    -665.72,
+                ),
+                rotation: -3.135653,
+                scale: Vec2(
+                    0.9944905,
+                    0.9944905,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftLeg",
+            parent: Some(55),
+            length: 4059.94,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    4059.94,
+                ),
+                rotation: -0.01183234,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftFoot",
+            parent: Some(56),
+            length: 4209.9,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    4209.9,
+                ),
+                rotation: 0.02646449,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftToeBase",
+            parent: Some(57),
+            length: 1572.1599,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1572.1599,
+                ),
+                rotation: -0.015131762,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:LeftToe_End",
+            parent: Some(58),
+            length: 1000.0,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1000.0,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightUpLeg",
+            parent: Some(0),
+            length: 1129.4363,
+            setup: Transform2D(
+                translation: Vec2(
+                    -912.5,
+                    -665.56,
+                ),
+                rotation: 3.1354785,
+                scale: Vec2(
+                    0.9944905,
+                    0.9944905,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightLeg",
+            parent: Some(60),
+            length: 4059.94,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    4059.94,
+                ),
+                rotation: 0.011832301,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightFoot",
+            parent: Some(61),
+            length: 4209.9,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    4209.9,
+                ),
+                rotation: -0.026465189,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightToeBase",
+            parent: Some(62),
+            length: 1572.1599,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1572.1599,
+                ),
+                rotation: 0.015102691,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+        Bone2D(
+            name: "mixamorig:RightToe_End",
+            parent: Some(63),
+            length: 1000.0,
+            setup: Transform2D(
+                translation: Vec2(
+                    0.0,
+                    1000.0,
+                ),
+                rotation: -0.0,
+                scale: Vec2(
+                    1.0,
+                    1.0,
+                ),
+            ),
+            shape: r#None,
+        ),
+    ],
+)

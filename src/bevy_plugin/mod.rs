@@ -93,8 +93,8 @@ pub mod systems;
 // Re-export commonly used types
 pub use assets::{Animation2DAsset, Animation2DAssetLoader, Skeleton2DAsset, Skeleton2DAssetLoader};
 pub use components::{
-    AnimationPlayer2D, BoneEntity, PlaybackState, Pose2D, SkeletonBundle, SkeletonDebugConfig,
-    SkeletonInstance,
+    AnimationPlayer2D, BoneColorMode, BoneEntity, PlaybackState, Pose2D, SkeletonBundle,
+    SkeletonDebugConfig, SkeletonInstance,
 };
 pub use primitives::SkeletonDebugEnabled;
 

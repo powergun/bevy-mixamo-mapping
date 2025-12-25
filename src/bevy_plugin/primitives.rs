@@ -91,51 +91,83 @@ fn draw_bone_hierarchy(
     children_query: &Query<&Children>,
 ) {
     for child in children.iter() {
-        if let Ok((bone_entity, global_transform, _pose)) = bone_query.get(child) {
+        if let Ok((bone_entity, global_transform, pose)) = bone_query.get(child) {
             let bone_idx = bone_entity.bone_index;
 
             // Get bone data from skeleton
             if let Some(bone) = skeleton.get_bone(bone_idx) {
                 let position = global_transform.translation().truncate();
 
-                // Draw bone line if enabled
-                if config.draw_bones && bone.length > 0.0 {
-                    draw_bone_line(gizmos, global_transform, bone.length, config.bone_color);
+                // Determine the color for this bone based on color mode
+                let bone_color = config
+                    .bone_color_mode
+                    .color_for_bone(&bone.name, config.bone_color);
+
+                // Draw bone line if enabled (skip root bones - their "length" is world position)
+                if config.draw_bones && bone.length > 0.0 && bone.parent.is_some() {
+                    draw_bone_line(gizmos, global_transform, bone.length, bone_color);
                 }
 
                 // Draw primitive shape if enabled
                 if config.draw_shapes {
-                    draw_primitive_shape(gizmos, &bone.shape, position, global_transform, config.shape_color);
+                    draw_primitive_shape(
+                        gizmos,
+                        &bone.shape,
+                        position,
+                        global_transform,
+                        config.shape_color,
+                    );
                 }
             }
 
             // Recursively draw children
             if let Ok(grandchildren) = children_query.get(child) {
-                draw_bone_hierarchy(gizmos, skeleton, config, grandchildren, bone_query, children_query);
+                draw_bone_hierarchy(
+                    gizmos,
+                    skeleton,
+                    config,
+                    grandchildren,
+                    bone_query,
+                    children_query,
+                );
             }
         }
     }
 }
 
-/// Draw a bone as a line from joint to tip
-fn draw_bone_line(gizmos: &mut Gizmos, transform: &GlobalTransform, length: f32, color: Color) {
-    // Start position is the bone's origin (joint)
-    let start = transform.translation().truncate();
+/// Draw a bone as a line from this joint toward its child direction
+///
+/// We draw from the bone's world position in the direction that points toward
+/// where child bones would be attached. The bone extends along local +Y,
+/// rotated by the bone's world rotation.
+fn draw_bone_line(
+    gizmos: &mut Gizmos,
+    transform: &GlobalTransform,
+    bone_length: f32,
+    color: Color,
+) {
+    // Bone's world position (the joint)
+    let pos = transform.translation().truncate();
 
-    // End position is along the bone's local Y axis (standard bone orientation)
-    // We need to apply the rotation to the direction
-    let local_direction = Vec2::Y * length;
-    let world_direction = transform
-        .affine()
-        .transform_vector3(Vec3::new(local_direction.x, local_direction.y, 0.0))
-        .truncate();
+    // Get rotation and scale from transform
+    let (scale_vec, rotation, _) = transform.to_scale_rotation_translation();
 
-    let end = start + world_direction;
+    // Use only the uniform scale component (ignoring foreshortening for line visualization)
+    // The bone_length is in internal units (cm * 100), display scale is typically 0.01
+    // We want the line length to be visually reasonable regardless of foreshortening
+    let display_scale = scale_vec.x.abs().max(0.001);
 
-    gizmos.line_2d(start, end, color);
+    // Draw the bone line in the local +Y direction (standard bone orientation)
+    // The bone extends from this joint toward where children attach
+    let scaled_length = bone_length * display_scale;
+    let local_direction = Vec3::new(0.0, scaled_length, 0.0);
+    let world_direction = rotation * local_direction;
+    let end = pos + world_direction.truncate();
 
-    // Draw a small circle at the joint
-    gizmos.circle_2d(start, 2.0, color);
+    gizmos.line_2d(pos, end, color);
+
+    // Draw a circle at the joint
+    gizmos.circle_2d(pos, 2.0, color);
 }
 
 /// Draw a primitive shape at the bone's position

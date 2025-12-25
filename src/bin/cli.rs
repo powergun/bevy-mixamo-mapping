@@ -22,7 +22,7 @@ use clap::{Parser, Subcommand, ValueEnum};
 use std::path::{Path, PathBuf};
 
 use bevy_mixamo_2d::{
-    fbx_parser::{self, FbxData},
+    fbx_parser::{self, traverse_skeleton_hierarchy, BoneFilter, FbxData},
     gltf_parser::{self, GltfData},
     project_animation, project_skeleton, save_animation, save_skeleton, ProjectionConfig, ViewAxis,
 };
@@ -66,6 +66,18 @@ enum Commands {
         /// Output animation sample rate in FPS
         #[arg(long, default_value = "30.0")]
         sample_rate: f32,
+
+        /// Select bones matching regex pattern (can specify multiple times).
+        /// If not specified, all bones are selected by default.
+        /// Multiple patterns have OR relationship.
+        #[arg(long = "select", value_name = "PATTERN")]
+        select_patterns: Vec<String>,
+
+        /// Exclude bones matching regex pattern (can specify multiple times).
+        /// Excluded bones and all their descendants are removed.
+        /// Multiple patterns have OR relationship.
+        #[arg(long = "exclude", value_name = "PATTERN")]
+        exclude_patterns: Vec<String>,
 
         /// Verbose output
         #[arg(short, long)]
@@ -119,6 +131,20 @@ enum Commands {
         #[arg(long)]
         animations: bool,
     },
+
+    /// Display skeleton hierarchy in a human-readable tree format
+    Skeleton {
+        /// Input FBX file path
+        input: PathBuf,
+
+        /// Indentation string for each hierarchy level
+        #[arg(long, default_value = "  ")]
+        indent: String,
+
+        /// Show only the tree without summary
+        #[arg(long)]
+        tree_only: bool,
+    },
 }
 
 #[derive(Clone, Copy, ValueEnum)]
@@ -147,6 +173,8 @@ struct ConversionOptions {
     scale: f32,
     foreshortening: bool,
     sample_rate: f32,
+    select_patterns: Vec<String>,
+    exclude_patterns: Vec<String>,
     verbose: bool,
 }
 
@@ -162,6 +190,8 @@ fn main() {
             scale,
             foreshortening,
             sample_rate,
+            select_patterns,
+            exclude_patterns,
             verbose,
         } => {
             let opts = ConversionOptions {
@@ -169,6 +199,8 @@ fn main() {
                 scale,
                 foreshortening,
                 sample_rate,
+                select_patterns,
+                exclude_patterns,
                 verbose,
             };
             convert_single(&input, &output, name.as_deref(), &opts)
@@ -188,6 +220,8 @@ fn main() {
                 scale,
                 foreshortening,
                 sample_rate,
+                select_patterns: Vec::new(),
+                exclude_patterns: Vec::new(),
                 verbose,
             };
             convert_batch(&input, &output, &opts, recursive)
@@ -197,6 +231,11 @@ fn main() {
             bones,
             animations,
         } => show_info(&input, bones, animations),
+        Commands::Skeleton {
+            input,
+            indent,
+            tree_only,
+        } => show_skeleton(&input, &indent, tree_only),
     };
 
     if let Err(e) = result {
@@ -233,6 +272,10 @@ fn convert_single(
         sample_rate: opts.sample_rate,
     };
 
+    // Build bone filter from patterns
+    let bone_filter = BoneFilter::from_patterns(&opts.select_patterns, &opts.exclude_patterns)?;
+    let has_filter = bone_filter.has_select_patterns() || bone_filter.has_exclude_patterns();
+
     if opts.verbose {
         println!("Converting: {}", input.display());
         println!("  Skeleton name: {}", skeleton_name);
@@ -240,10 +283,16 @@ fn convert_single(
         println!("  Scale: {}", opts.scale);
         println!("  Foreshortening: {}", opts.foreshortening);
         println!("  Sample rate: {} FPS", opts.sample_rate);
+        if !opts.select_patterns.is_empty() {
+            println!("  Select patterns: {:?}", opts.select_patterns);
+        }
+        if !opts.exclude_patterns.is_empty() {
+            println!("  Exclude patterns: {:?}", opts.exclude_patterns);
+        }
     }
 
     // Parse input file
-    let (nodes_3d, animations_3d) = match extension.as_str() {
+    let (nodes_3d_raw, animations_3d) = match extension.as_str() {
         "fbx" => {
             if opts.verbose {
                 println!("  Parser: FBX (ufbx)");
@@ -269,6 +318,21 @@ fn convert_single(
             )
             .into());
         }
+    };
+
+    // Apply bone filter
+    let nodes_3d = if has_filter {
+        let filtered = bone_filter.filter_nodes(&nodes_3d_raw);
+        if opts.verbose {
+            println!(
+                "  Filtered bones: {} -> {}",
+                nodes_3d_raw.len(),
+                filtered.len()
+            );
+        }
+        filtered
+    } else {
+        nodes_3d_raw
     };
 
     if opts.verbose {
@@ -538,4 +602,43 @@ fn sanitize_filename(name: &str) -> String {
             }
         })
         .collect()
+}
+
+/// Display skeleton hierarchy from an FBX file
+fn show_skeleton(
+    input: &Path,
+    indent: &str,
+    tree_only: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let extension = input
+        .extension()
+        .and_then(|e| e.to_str())
+        .map(|e| e.to_lowercase())
+        .unwrap_or_default();
+
+    if extension != "fbx" {
+        return Err(format!(
+            "The skeleton command only supports FBX files, got: {}",
+            extension
+        )
+        .into());
+    }
+
+    // Load FBX and extract skeleton - fbx_parser does the heavy lifting
+    let data = FbxData::load(input)?;
+    let nodes = fbx_parser::extract_skeleton(&data)?;
+
+    // Traverse and format hierarchy - fbx_parser::traversal does the work
+    let hierarchy = traverse_skeleton_hierarchy(&nodes);
+
+    // CLI just orchestrates the output
+    if tree_only {
+        print!("{}", hierarchy.format_tree(indent));
+    } else {
+        println!("File: {}", input.display());
+        println!();
+        print!("{}", hierarchy.format_with_summary(indent));
+    }
+
+    Ok(())
 }

@@ -57,7 +57,18 @@ mixamo2d convert <INPUT> [OPTIONS]
 | `--scale` | | 3D to 2D scale factor | `100.0` |
 | `--foreshortening` | | Enable depth scaling | `true` |
 | `--sample-rate` | | Output FPS | `30.0` |
+| `--select` | | Select bones matching regex (can repeat) | All bones |
+| `--exclude` | | Exclude bones matching regex (can repeat) | None |
 | `--verbose` | `-v` | Verbose output | `false` |
+
+**Bone Filtering:**
+
+The `--select` and `--exclude` options provide hierarchical bone filtering:
+
+- `--select <PATTERN>`: Only include bones matching the regex pattern. If not specified, all bones are selected. Multiple patterns have OR relationship.
+- `--exclude <PATTERN>`: Exclude bones matching the regex pattern. **Excluded bones and all their descendants are removed.** Multiple patterns have OR relationship.
+
+Filtering order: select patterns are applied first, then exclude patterns.
 
 **Examples:**
 
@@ -73,6 +84,18 @@ mixamo2d convert walk.fbx --view-axis z
 
 # Top-down view projection
 mixamo2d convert walk.fbx --view-axis y
+
+# Exclude all finger bones (reduces 65 bones to 25)
+mixamo2d convert walk.fbx -o output/ \
+  --exclude Thumb --exclude Index --exclude Middle --exclude Ring --exclude Pinky
+
+# Select only spine and head chain (7 bones)
+mixamo2d convert walk.fbx -o output/ --select Spine --select Head
+
+# Select upper body, exclude fingers
+mixamo2d convert walk.fbx -o output/ \
+  --select Spine --select Head --select Shoulder --select Arm \
+  --exclude Thumb --exclude Index --exclude Middle --exclude Ring --exclude Pinky
 ```
 
 **Output Files:**
@@ -168,6 +191,62 @@ Animations: 1
       Keyframes: 931
       Properties: 52 translation, 52 rotation, 52 scale
 ```
+
+### `skeleton` - Skeleton Hierarchy Display
+
+Displays the skeleton bone hierarchy in a human-readable tree format. Useful for inspecting the structure of FBX files.
+
+```bash
+mixamo2d skeleton <INPUT> [OPTIONS]
+```
+
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--indent` | Indentation string for each hierarchy level | `"  "` (2 spaces) |
+| `--tree-only` | Show only the tree without summary header | `false` |
+
+**Examples:**
+
+```bash
+# Full output with summary
+mixamo2d skeleton animation.fbx
+
+# Tree only (no summary header)
+mixamo2d skeleton animation.fbx --tree-only
+
+# Custom indentation (4 spaces)
+mixamo2d skeleton animation.fbx --indent "    "
+```
+
+**Sample Output:**
+
+```
+File: testdata/Sprint.fbx
+
+Bones: 65
+Root: mixamorig:Hips
+Max depth: 11
+
+Hierarchy:
+[0] mixamorig:Hips
+  [1] mixamorig:Spine
+    [2] mixamorig:Spine1
+      [3] mixamorig:Spine2
+        [4] mixamorig:Neck
+          [5] mixamorig:Head
+            [6] mixamorig:HeadTop_End
+        [7] mixamorig:LeftShoulder
+          [8] mixamorig:LeftArm
+            ...
+  [55] mixamorig:LeftUpLeg
+    [56] mixamorig:LeftLeg
+      [57] mixamorig:LeftFoot
+        ...
+```
+
+**Note:** The skeleton command only supports FBX files. Use the `info` command for GLB/GLTF files.
 
 ## Architecture
 

@@ -4,10 +4,14 @@
 //! Outputs the same data structures as gltf_parser for unified downstream processing.
 
 pub mod animation;
+pub mod filter;
 pub mod skeleton;
+pub mod traversal;
 
 pub use animation::extract_animations;
+pub use filter::{BoneFilter, BoneFilterError};
 pub use skeleton::extract_skeleton;
+pub use traversal::{traverse_skeleton_hierarchy, FormattedBone, SkeletonHierarchy};
 
 use crate::error::{Mixamo2dError, Result};
 use std::path::Path;

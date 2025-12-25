@@ -32,9 +32,32 @@ An interactive example demonstrating skeleton loading, animation playback, and d
 # First, generate test assets (if not already done)
 cargo run --features cli -- convert testdata/Sprint.fbx -o assets/
 
-# Run the example
+# Run the example with default files (assets/Sprint.skeleton2d.ron and assets/mixamo_com.anim2d.ron)
 cargo run --example play_animation
+
+# Run with custom skeleton and animation files
+cargo run --example play_animation -- --skeleton Walk.skeleton2d.ron --animation walk.anim2d.ron
+
+# Short form
+cargo run --example play_animation -- -s Walk.skeleton2d.ron -a walk.anim2d.ron
+
+# Also works with assets/ prefix
+cargo run --example play_animation -- -s assets/Walk.skeleton2d.ron -a assets/walk.anim2d.ron
+
+# Adjust scale factor (Mixamo skeletons are large, default is 0.02)
+cargo run --example play_animation -- --scale 0.01
 ```
+
+### Command-Line Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--skeleton` | `-s` | Path to skeleton file (*.skeleton2d.ron) | `Sprint.skeleton2d.ron` |
+| `--animation` | `-a` | Path to animation file (*.anim2d.ron) | `mixamo_com.anim2d.ron` |
+| `--scale` | | Scale factor for skeleton | `0.02` |
+| `--help` | `-h` | Print help | |
+
+Paths can be specified either relative to the `assets/` directory (e.g., `Sprint.skeleton2d.ron`) or with the `assets/` prefix (e.g., `assets/Sprint.skeleton2d.ron`). Both formats work correctly.
 
 ### Controls
 
